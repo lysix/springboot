@@ -3,14 +3,14 @@
 		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 	<!-- classPathEntry:数据库的JDBC驱动的jar包地址 -->
-	<classPathEntry location="F:\NormalRepository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39-bin.jar"/>
+	<classPathEntry location="E:\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/>
 	<context id="context">
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/study" userId="root"
+			connectionURL="jdbc:mysql://localhost:3306/study?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true" userId="root"
 			password="root" />
 
 		<javaTypeResolver>

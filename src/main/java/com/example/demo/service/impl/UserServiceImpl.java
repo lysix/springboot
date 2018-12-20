@@ -25,7 +25,8 @@ import java.util.List;
  * @return $
  * @date $ $
  */
-@Service("userService")
+//@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -115,4 +116,10 @@ public class UserServiceImpl implements UserService {
         logger.info(""+users.size());
         return users;
     }
+
+    @Override
+    public List<User> list() {
+        return userDao.list();
+    }
+
 }

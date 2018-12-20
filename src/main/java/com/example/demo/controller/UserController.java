@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -26,6 +27,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("user")
+@RestController
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -72,6 +74,25 @@ public class UserController {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/user/userInfo");
+        return modelAndView;
+    }
+
+    @RequestMapping("/test")
+    public List<User> test() {
+        System.out.println("111");
+        List<User> list = userService.list();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getName());
+        }
+        return list;
+    }
+
+    @RequestMapping("test1")
+    public ModelAndView list(Model model) {
+        List<User> list = userService.list();
+        model.addAttribute("userList", list);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("userInfo");
         return modelAndView;
     }
 }

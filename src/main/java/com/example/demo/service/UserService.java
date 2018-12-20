@@ -23,5 +23,7 @@ public interface UserService {
     public boolean insertUser(String userName,String passWord);
 
     public List<User> listUser(UserDto userDto);
+
+    public List<User> list();
 }
 
