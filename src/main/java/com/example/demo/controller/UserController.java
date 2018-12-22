@@ -27,7 +27,6 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("user")
-@RestController
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -68,31 +67,30 @@ public class UserController {
     public ModelAndView listUser(UserDto userDto, Model model){
 
         logger.info("查询用户列表，查询条件={}",userDto);
+        String userId = userDto.getId();
+        String userName = userDto.getName();
+
         List<User> users = userService.listUser(userDto);
 
-        model.addAttribute("userList",users);
-
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/user/userInfo");
-        return modelAndView;
-    }
-
-    @RequestMapping("/test")
-    public List<User> test() {
-        System.out.println("111");
-        List<User> list = userService.list();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getName());
-        }
-        return list;
-    }
-
-    @RequestMapping("test1")
-    public ModelAndView list(Model model) {
-        List<User> list = userService.list();
-        model.addAttribute("userList", list);
-        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("userList", users);
         modelAndView.setViewName("userInfo");
+        if (userId != null && userId != "") {
+            modelAndView.addObject("userId", userId);
+        }
+        if (userName != null && userName != "") {
+            modelAndView.addObject("userName", userName);
+        }
+
         return modelAndView;
     }
+
+    @RequestMapping(value = "/updatePage",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView updatePage(String id){
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("");
+        return modelAndView;
+    }
+
 }
